@@ -1,0 +1,21 @@
+def reproducir(padres, cuantos):
+    nuevaPoblacion = pygame.sprite.Group()
+    cfg.generaciones += 1
+    cantidadpadres=len(padres)-1
+    nuevaPoblacion.add(fn.crearHijo(padres[0]))
+    for idx in range(cuantos-1):
+        hijo = []
+        didx = rnd.randint(0,cantidadpadres)
+        midx = rnd.randint(0,cantidadpadres)
+        padre = padres[didx].movimientos
+        madre = padres[midx].movimientos
+        a=cfg.maxMovimientos
+        for gene in range(a):
+            probGene = rnd.randint(0,1)
+            if probGene == 1:
+                hijo.append(padre[gene])
+            elif probGene == 0:
+                hijo.append(madre[gene])
+        nuevaPoblacion.add(fn.crearIndividuo(hijo))
+
+    return nuevaPoblacion
